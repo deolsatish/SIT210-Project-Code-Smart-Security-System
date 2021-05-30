@@ -176,24 +176,30 @@ def FACE_RECOGNITION():
 
 
 
-        
+def LightOn_OFF():
+        LIGHT_ON()# this turns on the led of the house on for some period of time, this enables camera to work
+        time.sleep(20)
+        LIGHT_OFF()
         
 def MOTION_DETCTION(pirPIN):
     print("Motion Detected")
-    LIGHT_ON()# this turns on the led of the house on for some period of time, this enables camera to work
-    time.sleep(20)
-    LIGHT_OFF()
+    x1=threading.Thread(target=FACE_RECOGNITION)
+    x2=threading.Thread(target=LightOn_OFF)
+    x1.start()
+    x2.start()
+    x1.join()
+    x2.join()
+    
     
 def PIR_SENSOR():
     GPIO.add_event_detect(pirpin,GPIO.RISING,callback=MOTION_DETCTION)
     while 1:
         time.sleep(0.5)
-x1=threading.Thread(target=FACE_RECOGNITION)
-x2=threading.Thread(target=PIR_SENSOR)
-x1.start()
-x2.start()
-x1.join()
-x2.join()
+        
+PIR_SESNOR();
+        
+        
+
 # Do a bit of cleanup
 if KeyboardInterrupt:
     print("Exit")
