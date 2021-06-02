@@ -16,6 +16,8 @@ from email.mime.text import MIMEText
 
 pirpin=16
 
+facialrec=False;
+
         
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
